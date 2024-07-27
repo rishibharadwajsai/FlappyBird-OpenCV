@@ -21,7 +21,7 @@ pipe_frames = deque()
 pipe_img = pygame.image.load("pipe_sprite_single.png")
 
 pipe_starting_template = pipe_img.get_rect()
-space_between_pipes = 250
+space_between_pipes = 500
 
 # Game loop
 game_clock = time.time()
@@ -141,14 +141,14 @@ with mp_face_mesh.FaceMesh(
             top = pipe_starting_template.copy()
             
             # Calculate the vertical space available for the pipes
-            available_space = window_size[1] - space_between_pipes
+            available_space = window_size[1]
             
             # Calculate the minimum and maximum gap sizes
             min_gap_size = bird_img.get_height() + 20  # Minimum gap size is the height of the bird plus some padding
             max_gap_size = available_space - min_gap_size
             
             # Randomly select the gap size within the calculated range
-            gap_size = random.randint(min_gap_size, max_gap_size)
+            gap_size = 150
             
             # Calculate the position where the gap starts on the top pipe
             min_gap_position = 50  # Minimum gap position from the top
