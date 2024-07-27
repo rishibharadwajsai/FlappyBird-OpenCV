@@ -139,43 +139,30 @@ with mp_face_mesh.FaceMesh(
 
         if pipeSpawnTimer == 0:
             top = pipe_starting_template.copy()
-            
-            # Calculate the vertical space available for the pipes
             available_space = window_size[1]
-            
-            # Calculate the minimum and maximum gap sizes
-            min_gap_size = bird_img.get_height() + 20  # Minimum gap size is the height of the bird plus some padding
+            min_gap_size = bird_img.get_height() + 20
             max_gap_size = available_space - min_gap_size
-            
-            # Randomly select the gap size within the calculated range
             gap_size = 150
-            
-            # Calculate the position where the gap starts on the top pipe
-            min_gap_position = 50  # Minimum gap position from the top
-            max_gap_position = available_space - gap_size - min_gap_position  # Maximum gap position from the top
+            min_gap_position = 50  
+            max_gap_position = available_space - gap_size - min_gap_position 
             
             if max_gap_position >= min_gap_position:
                 gap_position = random.randint(min_gap_position, max_gap_position)
             else:
                 gap_position = min_gap_position
             
-            # Set top pipe position
             top.x = window_size[0]
-            top.y = gap_position - pipe_img.get_height()  # Adjusting top pipe position based on gap
+            top.y = gap_position - pipe_img.get_height() 
             
-            # Calculate bottom pipe position
             bottom = pipe_starting_template.copy()
-            bottom.x, bottom.y = window_size[0], gap_position + gap_size  # Directly below the top pipe
+            bottom.x, bottom.y = window_size[0], gap_position + gap_size 
             
-            # Append pipes to pipe_frames deque
             pipe_frames.append([top, bottom])
 
 
-        # Update pipe spawn timer - make it cyclical
         pipeSpawnTimer += 1
         if pipeSpawnTimer >= time_between_pipe_spawn: pipeSpawnTimer = 0
 
-        # Update stage
         if time.time() - game_clock >= 10:
             time_between_pipe_spawn *= 5 / 6
             stage += 1
